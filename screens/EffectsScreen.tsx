@@ -7,7 +7,7 @@ import { BlurMask } from '@shopify/react-native-skia';
 
 const { width, height } = Dimensions.get('window');
 
-type FilterType = 'original' | 'blur' | 'grayscale' | 'sepia' | 'pixel' | 'invert';
+type FilterType = 'original' | 'blur' | 'grayscale' | 'sepia';
 
 export default function EffectsScreen() {
   const [uri, setUri] = useState<string | null>(null);
@@ -40,37 +40,16 @@ export default function EffectsScreen() {
 
   return (
     <View style={styles.container}>
-      <Button title="Vybrat obrázek" onPress={pickImage} />
+      <Button title="Obrázek z galerie" onPress={pickImage} />
       <View style={styles.buttons}>
-        <Button title="Originál" onPress={() => setFilter('original')} />
-        <Button title="Blur" onPress={() => setFilter('blur')} />
+        <Button title="Základ" onPress={() => setFilter('original')} />
+        <Button title="Rozmazat" onPress={() => setFilter('blur')} />
         <Button title="Grayscale" onPress={() => setFilter('grayscale')} />
-        <Button title="Sepia" onPress={() => setFilter('sepia')} />
+        <Button title="Sépie" onPress={() => setFilter('sepia')} />
       </View>
       {image && (
         <Canvas style={styles.canvas}>
-          {filter === 'pixel' ? (
-            <>
-              <SkiaImage
-                image={image}
-                x={0}
-                y={0}
-                width={Math.round(width / 20)}
-                height={Math.round(height / 20)}
-                fit="fill"
-                filterMode="nearest"
-              />
-              <SkiaImage
-                image={image}
-                x={0}
-                y={0}
-                width={width}
-                height={height}
-                fit="fill"
-                filterMode="nearest"
-              />
-            </>
-          ) : filter === 'blur' ? (
+          {filter === 'blur' ? (
             <SkiaImage image={image} x={0} y={0} width={width} height={height}>
               <BlurMask blur={100} style="normal" />
             </SkiaImage>
@@ -84,7 +63,7 @@ export default function EffectsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, marginTop: 40, backgroundColor: '#fff' },
   canvas: { flex: 1 },
-  buttons: { flexDirection: 'row', justifyContent: 'space-around', marginVertical: 10 },
+  buttons: { flexDirection: 'row', justifyContent: 'space-around', marginVertical: 25 },
 });
