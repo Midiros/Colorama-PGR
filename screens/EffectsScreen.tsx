@@ -36,14 +36,6 @@ export default function EffectsScreen() {
       0.272, 0.534, 0.131, 0, 0,
       0, 0, 0, 1, 0
     ]));
-  } else if (filter === 'invert') {
-    paint = Skia.Paint();
-    paint.setColorFilter(Skia.ColorFilter.MakeMatrix([
-      -1,  0,  0, 0, 255,
-       0, -1,  0, 0, 255,
-       0,  0, -1, 0, 255,
-       0,  0,  0, 1,   0,
-    ]));
   }
 
   return (
@@ -52,7 +44,6 @@ export default function EffectsScreen() {
       <View style={styles.buttons}>
         <Button title="Originál" onPress={() => setFilter('original')} />
         <Button title="Blur" onPress={() => setFilter('blur')} />
-        <Button title="Invert" onPress={() => setFilter('invert')} />
         <Button title="Grayscale" onPress={() => setFilter('grayscale')} />
         <Button title="Sepia" onPress={() => setFilter('sepia')} />
       </View>
